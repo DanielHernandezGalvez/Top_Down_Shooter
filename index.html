@@ -1,61 +1,31 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bootstrap Index</title>
-    <!--Bootstrap local-->
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <!--sass-->
-    <link rel="stylesheet" href="sass/_variables.scss">
+    <title>Home</title>
+    <link rel="stylesheet" href="./css/estilos.css">
 </head>
-    <header class="container-fluid">
-        
-       
-        
-       
 
-        <nav class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 navbar navbar-dark container-fluid nav-pills">
-            
-            <img src="logo_cognitive.jpg" width="5%" alt="logotipo cognitive"> 
-        
-
-              <a class="navbar-brand nav-link active" href="index.html">INICIO</a>
-           
-          
-              <a class="navbar-brand nav-link active" href="Nosotros.html">NOSOTROS</a>
-        
-              <a class="navbar-brand nav-link active" href="Servicios.html">SERVICIOS</a>
-           
-         
-              <a class="navbar-brand nav-link active" href="Contacto.html">CONTACTO</a>
-           
-
-         
-         
-          </nav>
-
-    </header>
-    <body>
-        <div class="col-sm-12 col-md-12 col-lg-12 posicion">
-        <h1 class="container-fluid nav-bar">PUBLICIDAD DIGITAL</h1>
-        <img src="lente_de_camara.png" class="img-fluid"  alt="lente de camara">
+<body>
+    <div class="margen">
+        <h1 class="h1">Calculadora</h1>
     </div>
-       <main>
-    <h2 class="naranja">Inicio</h2>
-    <p class=>La publicidad digital se refiere al marketing a través de canales en línea, como sitios web, contenido en streaming y más. Los anuncios digitales abarcan formatos de medios, incluidos texto, imagen, audio y video.</p>
-    <img src="comunicación.png" class="img-fluid" width="100%"  alt="comunicación">
-    <p class="centrar boxTexto">La publicidad online permite que el público pueda acceder mientras se encuentra en internet, puede obtener más información sobre el producto o servicio de manera inmediata, con solo hacer un clic pueden acceder a tu página, conocer tus productos y la historia de tu empresa.</p>
-    <br> 
-       </main>
-    </body>
-    <footer class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12  container-fluid">
-        <div class="navbar navbar-dark">
-        <img src="logo_cognitive.jpg" width="5%" alt="logotipo cognitive"> 
-        <p class="derecha menu">
-      Envíanos tus preguntas o comentarios. 3343548998  cognitivegdl@gmail.com o visitanos en  Calle Cruz Verde 8 Colonia Americana.</p>
+    <div class="margen">
+        <textarea name="" id="area" cols="18" rows="1"></textarea>
+        <br>
     </div>
-    </footer>
-    </html>
+    <div class="margen">
+        <label for=""></label>
+        <button onclick="leerValores('+')">+</button>
+        <button onclick="leerValores('/')">÷</button>
+        <button onclick="leerValores('-')">-</button>
+        <button onclick="leerValores('*')">x</button>
+    </div>
 
+    <script src="./js/main.js"></script>
+</body>
+
+</html>
