@@ -2,7 +2,7 @@ let textArea = document.getElementById('area');
 
 
 function sumar(numero1, numero2) {
-  let resultadoSuma = numero1 + numero2;
+  let resultadoSuma = numero1 + numero2
   return resultadoSuma;
 }
 
