@@ -1,4 +1,4 @@
-let textArea = document.getElementById('area')
+let textArea = document.getElementById('area');
 
 
 function sumar(numero1, numero2) {
