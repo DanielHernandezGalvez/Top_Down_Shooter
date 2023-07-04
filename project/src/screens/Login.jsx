@@ -7,13 +7,20 @@ import {
   Alert,
   TextInput,
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function Login() {
+export default function Login({navigation}) {
   const [name, setName] = useState('');
-  const setData = () => {
+  const setData = async () => {
     if (name.length == 0) {
       Alert.alert('Warning', 'please write your name');
     } else {
+      try {
+        await AsyncStorage.setItem('UserName', name);
+        navigation.navigate('Home');
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
   return (
