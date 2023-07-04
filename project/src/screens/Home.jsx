@@ -5,6 +5,18 @@ import {View, Text, StyleSheet, TouchableOpacity, Alert} from 'react-native';
 import GlobalStyles from '../utils/GlobalStyles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {TextInput} from 'react-native-gesture-handler';
+import SQLite from 'react-native-sqlite-storage';
+
+const db = SQLite.openDatabase(
+  {
+    name: 'MAinDB',
+    location: 'default',
+  },
+  () => {},
+  error => {
+    console.log(error);
+  },
+);
 
 export default function Home({navigation}) {
   const [name, setName] = useState('');
@@ -15,10 +27,18 @@ export default function Home({navigation}) {
 
   const getData = () => {
     try {
-      AsyncStorage.getItem('UserName').then(value => {
-        if (value != null) {
-          setName(value);
-        }
+      // AsyncStorage.getItem('UserName').then(value => {
+      //   if (value != null) {
+      //     setName(value);
+      db.transaction(tx => {
+        tx.executeSql('SELECT Name, Age FROM Users', [], (tx, results) => {
+          var len = results.rows.length;
+          if (len > 0) {
+            var userName = results.rows.item(0).Name;
+            var userAge = results.rows.item(0).Age;
+            setName(userName);
+          }
+        });
       });
     } catch (error) {
       console.log(error);

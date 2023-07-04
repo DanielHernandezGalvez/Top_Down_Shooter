@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   StyleSheet,
@@ -8,21 +8,61 @@ import {
   TextInput,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import SQLite from 'react-native-sqlite-storage';
+
+const db = SQLite.openDatabase(
+  {
+    name: 'MAinDB',
+    location: 'default',
+  },
+  () => {},
+  error => {
+    console.log(error);
+  },
+);
 
 export default function Login({navigation}) {
   const [name, setName] = useState('');
+
+  useEffect(() => {
+    createTable();
+  }, []);
+
+  const createTable = () => {
+    db.transaction(tx => {
+      tx.executeSql(
+        'CREATE TABLE IF NOT EXIST ' +
+          'Users' +
+          '(ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Age INTEGER);',
+      );
+    });
+  };
+
   const setData = async () => {
     if (name.length == 0) {
       Alert.alert('Warning', 'please write your name');
     } else {
       try {
-        await AsyncStorage.setItem('UserName', name);
+        // await AsyncStorage.setItem('UserName', name);
+        await db.transaction(async tx => {
+          // await tx.executeSql(
+          //   "INSERT INTO Users (Name, Age) VALUES ('" +
+          //     name +
+          //     "', " +
+          //     age +
+          //     ')',
+          await tx.executeSql('INSERT INTO Users (Name, Age) VALUES (?,?)', [
+            name,
+            age,
+          ]);
+        });
         navigation.navigate('Home');
       } catch (error) {
         console.log(error);
       }
     }
   };
+
   return (
     <View style={styles.body}>
       <Text>Login</Text>
