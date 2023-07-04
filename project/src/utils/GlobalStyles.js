@@ -1,5 +1,9 @@
 import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
-  CustomFontBig: {},
+  mainTitle: {
+    fontSize: 40,
+    fontWeight: 'bold',
+    color: '#000',
+  },
 });
