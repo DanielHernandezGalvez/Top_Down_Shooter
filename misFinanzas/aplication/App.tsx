@@ -14,7 +14,6 @@ import {
   Button,
   StyleSheet,
   ScrollView,
-  Alert,
   TouchableOpacity,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -142,7 +141,7 @@ const App: React.FC = () => {
 
       <ScrollView style={styles.section}>
         {registros.length === 0 ? (
-          <Text>Sin registros</Text>
+          <Text style={styles.SinRegistros}>Sin registros</Text>
         ) : (
           <>
             {registros.map((registro, index) => (
@@ -150,6 +149,7 @@ const App: React.FC = () => {
                 key={index}
                 style={{
                   flexDirection: 'row',
+                  marginVertical: 20,
                   justifyContent: 'space-between',
                   backgroundColor: getRegistroBackgroundColor(registro.tipo),
                 }}>
@@ -245,6 +245,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#102A33',
   },
   capital: {
     backgroundColor: '#0089BA',
@@ -299,13 +300,18 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 30,
-    backgroundColor: 'blue',
+    backgroundColor: '#0089BA',
     justifyContent: 'center',
     alignItems: 'center',
   },
   buttonText: {
     fontSize: 24,
     color: 'white',
+  },
+  SinRegistros: {
+    textAlign: 'center',
+    marginTop: '50%',
+    fontSize: 20,
   },
 });
 
