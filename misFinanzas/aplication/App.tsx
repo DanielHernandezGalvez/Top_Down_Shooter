@@ -149,17 +149,31 @@ const App: React.FC = () => {
                 key={index}
                 style={{
                   flexDirection: 'row',
-                  marginVertical: 20,
+                  marginVertical: 5,
                   justifyContent: 'space-between',
-                  backgroundColor: getRegistroBackgroundColor(registro.tipo),
+                  alignItems: 'center',
                 }}>
-                <Text>
-                  {registro.tipo}: {registro.cantidad} - {registro.descripcion}
-                </Text>
-                <Button
-                  title="Eliminar"
-                  onPress={() => deleteRegistro(index)}
-                />
+                <View style={{width: '70%'}}>
+                  <Text style={{alignItems: 'center'}}>
+                    {registro.tipo === 'Ingreso' ? (
+                      <Text style={styles.Mas}>+</Text>
+                    ) : (
+                      <Text style={styles.Menos}>-</Text>
+                    )}
+                    <Text style={styles.Dinero}> ${registro.cantidad}</Text>{' '}
+                    <Text style={styles.description}>
+                      - {registro.descripcion}
+                    </Text>
+                  </Text>
+                </View>
+
+                <View>
+                  <TouchableOpacity
+                    style={styles.btnDelete}
+                    onPress={() => deleteRegistro(index)}>
+                    <Text style={styles.textBtn}>Eliminar</Text>
+                  </TouchableOpacity>
+                </View>
               </View>
             ))}
           </>
@@ -184,26 +198,41 @@ const App: React.FC = () => {
         animationType="slide"
         transparent={true}
         onShow={resetInputs}>
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <View style={{backgroundColor: 'white', padding: 20}}>
+        <View style={styles.modal}>
+          <View style={{backgroundColor: 'white', padding: 50}}>
             <TextInput
               placeholder="Cantidad"
               onChangeText={num => setCantidad(num)}
               value={cantidad}
               keyboardType="numeric"
+              style={styles.inputModal}
             />
             <TextInput
               placeholder="Descripción"
               onChangeText={text => setDescripcion(text)}
               value={descripcion}
               keyboardType="default"
+              style={styles.inputModal}
             />
-            <Button
-              title="Agregar Ingresos"
-              onPress={handleIngresos}
-              disabled={cantidad === ''}
-            />
-            <Button title="Cerrar" onPress={() => setModalIngreso(false)} />
+            <View
+              style={{
+                marginTop: '10%',
+                flexDirection: 'row',
+                justifyContent: 'center',
+                gap: 10,
+              }}>
+              <TouchableOpacity
+                onPress={handleIngresos}
+                disabled={cantidad === ''}
+                style={styles.btnModal}>
+                <Text style={styles.textBtn}>AGREGAR</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.btnCancel}
+                onPress={() => setModalIngreso(false)}>
+                <Text style={styles.textBtn}>CERRAR</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </Modal>
@@ -213,26 +242,41 @@ const App: React.FC = () => {
         animationType="slide"
         transparent={true}
         onShow={resetInputs}>
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <View style={{backgroundColor: 'white', padding: 20}}>
+        <View style={styles.modal}>
+          <View style={{backgroundColor: 'white', padding: 50}}>
             <TextInput
               placeholder="Cantidad"
               onChangeText={num => setCantidad(num)}
               value={cantidad}
               keyboardType="numeric"
+              style={styles.inputModal}
             />
             <TextInput
               placeholder="Descripción"
               onChangeText={text => setDescripcion(text)}
               value={descripcion}
               keyboardType="default"
+              style={styles.inputModal}
             />
-            <Button
-              title="Agregar Gastos"
-              onPress={handleGastos}
-              disabled={cantidad === ''}
-            />
-            <Button title="Cerrar" onPress={() => setModalGasto(false)} />
+            <View
+              style={{
+                marginTop: '10%',
+                flexDirection: 'row',
+                justifyContent: 'center',
+                gap: 10,
+              }}>
+              <TouchableOpacity
+                onPress={handleGastos}
+                disabled={cantidad === ''}
+                style={styles.btnModal}>
+                <Text style={styles.textBtn}>AGREGAR </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.btnCancel}
+                onPress={() => setModalGasto(false)}>
+                <Text style={styles.textBtn}>CERRAR</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </Modal>
@@ -248,7 +292,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#102A33',
   },
   capital: {
-    backgroundColor: '#0089BA',
+    backgroundColor: '#FFAC57',
     margin: 20,
     width: '90%',
     height: 70,
@@ -256,8 +300,8 @@ const styles = StyleSheet.create({
   },
   section: {
     width: '90%',
-    maxHeight: '55%',
-    backgroundColor: '#ddd',
+    maxHeight: '63%',
+    backgroundColor: '#ffffff37',
     paddingHorizontal: 15,
     borderRadius: 5,
     marginVertical: 20,
@@ -265,16 +309,18 @@ const styles = StyleSheet.create({
   h1: {
     fontSize: 40,
     textAlign: 'center',
-    paddingVertical: 'auto',
+    paddingVertical: '2%',
+    marginEnd: '10%',
   },
   p: {
     margin: 5,
+    marginTop: -2,
     position: 'absolute',
   },
   operaciones: {
     flexDirection: 'row',
     gap: 30,
-    paddingVertical: 20,
+    paddingVertical: 0,
   },
   gastos: {
     backgroundColor: '#CD5D5C',
@@ -312,6 +358,62 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: '50%',
     fontSize: 20,
+    color: '#fff',
+  },
+  modal: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  inputModal: {
+    width: 200,
+    marginBottom: '4%',
+    borderBottomWidth: 1,
+    borderBottomColor: '#ddd',
+    borderRadius: 5,
+  },
+  btnModal: {
+    alignSelf: 'center',
+    width: 90,
+    borderRadius: 4,
+    padding: 10,
+    backgroundColor: '#0089BA',
+    marginVertical: 15,
+  },
+  textBtn: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+    color: '#fff',
+  },
+  btnCancel: {
+    alignSelf: 'center',
+    width: 90,
+    borderRadius: 4,
+    padding: 10,
+    backgroundColor: '#CD5D5C',
+    marginVertical: 15,
+  },
+  Mas: {
+    fontSize: 30,
+    color: '#009466',
+  },
+  Menos: {
+    fontSize: 30,
+    color: '#CD5D5C',
+  },
+  Dinero: {
+    fontSize: 25,
+    color: '#fff',
+  },
+  btnDelete: {
+    alignSelf: 'center',
+    width: 90,
+    borderRadius: 4,
+    padding: 10,
+    backgroundColor: '#CD5D5C',
+  },
+  description: {
+    color: '#fff',
   },
 });
 
