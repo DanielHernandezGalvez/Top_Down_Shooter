@@ -18,7 +18,7 @@ const Timer: React.FC<TimerProps> = ({ time }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 0.3,
+    flex: 0.4,
     justifyContent: "center",
     backgroundColor: "#F2F2F2",
     padding: 15,

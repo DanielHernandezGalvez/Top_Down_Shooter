@@ -29,7 +29,7 @@ const App = () => {
     if (isActive) {
       interval = setInterval(() => {
         setTime(time - 1);
-      }, 1);
+      }, 1000);
     } else {
       clearInterval(interval);
     }
@@ -115,6 +115,8 @@ const App = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
     backgroundColor: "#fff",
     padding: 20,
   },
