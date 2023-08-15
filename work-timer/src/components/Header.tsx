@@ -10,7 +10,7 @@ interface HeaderProps {
   setCurrentTime: (currentTime: "POMO" | "SHORT" | "BREAK") => void;
 }
 
-const options = ["Pomodoro", "Short Break", "Long Break"];
+const options = ["Working", "Short Break", "Long Break"];
 
 const Header: React.FC<HeaderProps> = ({
   currentTime,
