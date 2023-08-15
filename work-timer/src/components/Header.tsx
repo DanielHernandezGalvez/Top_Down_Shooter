@@ -3,7 +3,10 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 
 interface HeaderProps {
   currentTime: "POMO" | "SHORT" | "BREAK";
+  isActive: boolean;
   setTime: (time: number) => void;
+  setIsTimeUp: (isTimeUp: boolean) => void;
+  setIsActive: (isActive: boolean) => void;
   setCurrentTime: (currentTime: "POMO" | "SHORT" | "BREAK") => void;
 }
 
@@ -13,6 +16,9 @@ const Header: React.FC<HeaderProps> = ({
   currentTime,
   setTime,
   setCurrentTime,
+  setIsActive,
+  isActive,
+  setIsTimeUp,
 }) => {
   function handlePress(index: number) {
     const newTime = index === 0 ? 25 : index === 1 ? 5 : 15;
@@ -20,6 +26,8 @@ const Header: React.FC<HeaderProps> = ({
       index === 0 ? "POMO" : index === 1 ? "SHORT" : "BREAK";
     setCurrentTime(newCurrentTime);
     setTime(newTime * 60);
+    setIsActive(isActive && false);
+    setIsTimeUp(false);
   }
 
   const currentTimeIndex =
@@ -46,7 +54,7 @@ const Header: React.FC<HeaderProps> = ({
 
 const styles = StyleSheet.create({
   itemStyle: {
-    width: "30%",
+    width: "33%",
     borderWidth: 3,
     alignItems: "center",
     padding: 5,
