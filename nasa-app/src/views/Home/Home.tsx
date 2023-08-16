@@ -1,8 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, StyleSheet } from "react-native";
 import Header from "../../constants/Header/Header";
 
+import fetchApi from "../../utils/fetch";
+
 const Home = () => {
+  const [todaysImage, setTodaysImage] = useState();
+
+  useEffect(() => {
+    const loadTodaysImage = async () => {
+      try {
+        const todaysImageResponse = await fetchApi();
+        setTodaysImage(todaysImageResponse);
+      } catch (error) {
+        console.log(error);
+        setTodaysImage(undefined);
+      }
+    };
+    loadTodaysImage().catch(null);
+  }, []);
+
+  console.log(todaysImage);
+
   return (
     <View style={styles.container}>
       <Header />
