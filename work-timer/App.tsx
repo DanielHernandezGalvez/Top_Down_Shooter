@@ -73,8 +73,8 @@ const App = () => {
     POMO: 0,
     SHORT: 1,
     BREAK: 2,
-  };
-
+    };
+ 
   return (
     <SafeAreaView
       style={[
