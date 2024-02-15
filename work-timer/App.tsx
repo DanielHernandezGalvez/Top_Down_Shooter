@@ -27,11 +27,15 @@ const App = () => {
     let interval: any = null;
 
     if (isActive) {
+      
       interval = setInterval(() => {
         setTime(time - 1);
       }, 1000);
+      
     } else {
+      
       clearInterval(interval);
+      
     }
 
     if (time === 0) {
