@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-const App = () => {
+const App: React.FC = () => {
   const [opciones, setOpciones] = useState('');
   const [opcionSeleccionada, setOpcionSeleccionada] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
