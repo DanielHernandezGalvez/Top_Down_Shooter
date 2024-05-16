@@ -57,7 +57,7 @@ const App: React.FC = () => {
               onPress={() => {
                 setModalVisible(!modalVisible);
               }}>
-              <Text >Cerrar</Text>
+              <Text style={styles.modalClose}>Cerrar</Text>
             </TouchableOpacity>
           </View>
         </View>
