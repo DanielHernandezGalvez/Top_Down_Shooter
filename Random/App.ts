@@ -17,7 +17,6 @@ const App: React.FC = () => {
     const opcionesArray = opciones.split(',');
     const opcionAleatoria =
       opcionesArray[Math.floor(Math.random() * opcionesArray.length)];
-
     setOpcionSeleccionada(opcionAleatoria);
     setModalVisible(true);
   };
