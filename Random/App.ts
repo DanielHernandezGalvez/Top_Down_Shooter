@@ -52,7 +52,10 @@ const App: React.FC = () => {
           <View style={styles.modalContent}>
             <Text style={styles.textSelected}>La opción seleccionada es:</Text>
             <Text style={styles.selected}>{opcionSeleccionada}</Text>
-          
+            <TouchableOpacity
+              onPress={() => {
+                setModalVisible(!modalVisible);
+              }}>
               <Text style={styles.modalClose}>Cerrar</Text>
             </TouchableOpacity>
           </View>
