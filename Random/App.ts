@@ -1,12 +1,5 @@
 import { useState } from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  StyleSheet,
-  Modal,
-  TouchableOpacity,
-} from 'react-native';
+import {  View,  Text,  TextInput,  StyleSheet,  Modal,  TouchableOpacity,  } from 'react-native';
 
 const App: React.FC = () => {
   const [opciones, setOpciones] = useState('');
