@@ -12,6 +12,7 @@ const App: React.FC = () => {
   const [opciones, setOpciones] = useState('');
   const [opcionSeleccionada, setOpcionSeleccionada] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
+  const [newdiv, setNewdiv] = useState()
 
   const seleccionarOpcion = () => {
     const opcionesArray = opciones.split(',');
