@@ -37,6 +37,7 @@ const App: React.FC = () => {
         scrollEnabled={true}
         borderColorActive="#f19601"
       />
+          
       <TouchableOpacity style={styles.button} onPress={seleccionarOpcion}>
         <Text style={styles.textButton}> Seleccionar Opcion </Text>
       </TouchableOpacity>
@@ -48,6 +49,7 @@ const App: React.FC = () => {
         onRequestClose={() => {
           setModalVisible(!modalVisible);
         }}>
+          
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
             <Text style={styles.textSelected}>La opción seleccionada es:</Text>
@@ -82,7 +84,7 @@ const styles = StyleSheet.create({
   texTutorial: {
     textAlign: 'left',
     alignSelf: 'flex-start',
-    paddingStart:"8%"
+    paddingStart:"8%",
   },
   tutorial: {
     color: '#575e55',
