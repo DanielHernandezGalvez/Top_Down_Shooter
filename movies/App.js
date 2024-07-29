@@ -25,7 +25,7 @@ export default function App() {
           }}
         />
         <Text style={{ color: "#fff" }}>
-          Open up App.js to start working on your app!
+          Javascript
         </Text>
 
         <Image
@@ -39,7 +39,7 @@ export default function App() {
           }}
         />
         <Text style={{ color: "#fff" }}>
-          Open up App.js to start working on your app!
+          Php
         </Text>
         <Image
           source={{
@@ -52,7 +52,7 @@ export default function App() {
           }}
         />
         <Text style={{ color: "#fff" }}>
-          Open up App.js to start working on your app!
+          Python
         </Text>
         <StatusBar style="light" />
       </View>
@@ -67,6 +67,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingTop: 50,
-    paddingBottom: 50
+    paddingBottom: 50,
   },
 });
