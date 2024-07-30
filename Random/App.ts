@@ -6,6 +6,7 @@ import {
   StyleSheet,  
   Modal,  
   TouchableOpacity,  
+  ScrollAreaView
 } from 'react-native';
 
 const App: React.FC = () => {
