@@ -1,0 +1,18 @@
+name: Deploy to [Tu entorno]
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Deploy
+        run: |
+          # Aquí van los comandos para desplegar tu aplicación
+          # Ejemplo para una aplicación Node.js:
+          npm ci
+          npm run build
+          # Comando para desplegar en tu plataforma (por ejemplo, Netlify, Vercel, etc.)
