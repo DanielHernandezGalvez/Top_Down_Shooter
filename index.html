@@ -3,28 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prueba de Conexión</title>
+    <title>Lista de Usuarios</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
 </head>
 <body>
-    <h1>Prueba de Conexión a la Base de Datos</h1>
-    <button id="test-connection">Probar Conexión</button>
-    <p id="result"></p>
+    <h1>Lista de Usuarios</h1>
+    <button id="fetch-users">Cargar Usuarios</button>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Fecha de Registro</th>
+            </tr>
+        </thead>
+        <tbody id="user-table">
+            <!-- Aquí se mostrarán los usuarios -->
+        </tbody>
+    </table>
 
     <script>
-        document.getElementById('test-connection').addEventListener('click', async () => {
-            try {
-                // Realiza la solicitud al archivo PHP
-                const response = await fetch('./backend/test_connection.php');
-                if (!response.ok) {
-                    throw new Error('Error al consultar la conexión');
-                }
+        document.getElementById('fetch-users').addEventListener('click', async () => {
+            const tableBody = document.getElementById('user-table');
+            tableBody.innerHTML = ''; // Limpia la tabla antes de llenarla
 
-                // Procesa la respuesta JSON
-                const data = await response.json();
-                document.getElementById('result').textContent = `Estado: ${data.status}, Mensaje: ${data.message}`;
+            try {
+                // Realiza la solicitud al backend
+                const response = await fetch('./backend/get_users.php');
+                if (!response.ok) throw new Error('Error al obtener los usuarios');
+
+                const { status, data } = await response.json();
+                if (status === 'success') {
+                    // Llena la tabla con los datos obtenidos
+                    data.forEach(user => {
+                        const row = `
+                            <tr>
+                                <td>${user.id}</td>
+                                <td>${user.nombre}</td>
+                                <td>${user.email}</td>
+                                <td>${new Date(user.created_at).toLocaleString()}</td>
+                            </tr>
+                        `;
+                        tableBody.innerHTML += row;
+                    });
+                } else {
+                    throw new Error('No se pudieron obtener los usuarios');
+                }
             } catch (error) {
-                // Muestra errores en caso de que ocurran
-                document.getElementById('result').textContent = `Error: ${error.message}`;
+                // Muestra el error en la consola
+                console.error(error.message);
+                tableBody.innerHTML = `<tr><td colspan="4">Error: ${error.message}</td></tr>`;
             }
         });
     </script>
