@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Usuarios</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lista de Usuarios</h1>
+    <button id="fetch-users">Cargar Usuarios</button>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Fecha de Registro</th>
+            </tr>
+        </thead>
+        <tbody id="user-table">
+            <!-- Aquí se mostrarán los usuarios -->
+        </tbody>
+    </table>
+
+    <script>
+        document.getElementById('fetch-users').addEventListener('click', async () => {
+            const tableBody = document.getElementById('user-table');
+            tableBody.innerHTML = ''; // Limpia la tabla antes de llenarla
+
+            try {
+                // Realiza la solicitud al backend
+                const response = await fetch('./backend/get_users.php');
+                if (!response.ok) throw new Error('Error al obtener los usuarios');
+
+                const { status, data } = await response.json();
+                if (status === 'success') {
+                    // Llena la tabla con los datos obtenidos
+                    data.forEach(user => {
+                        const row = `
+                            <tr>
+                                <td>${user.id}</td>
+                                <td>${user.nombre}</td>
+                                <td>${user.email}</td>
+                                <td>${new Date(user.created_at).toLocaleString()}</td>
+                            </tr>
+                        `;
+                        tableBody.innerHTML += row;
+                    });
+                } else {
+                    throw new Error('No se pudieron obtener los usuarios');
+                }
+            } catch (error) {
+                // Muestra el error en la consola
+                console.error(error.message);
+                tableBody.innerHTML = `<tr><td colspan="4">Error: ${error.message}</td></tr>`;
+            }
+        });
+    </script>
+</body>
+</html>
