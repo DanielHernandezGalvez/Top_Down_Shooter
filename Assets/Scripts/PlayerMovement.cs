@@ -1,0 +1,43 @@
+using UnityEngine;
+
+public class PlayerMovement : MonoBehaviour
+{
+    [SerializeField] private float speed;
+
+    private Rigidbody2D rb;
+    private Vector2 input;
+    private bool isFacingRight = true;
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+    void Update()
+    {
+        ProcessInput();
+        Flip();
+    }
+
+    private void ProcessInput()
+    {
+        float xInput = Input.GetAxisRaw("Horizontal");
+        float yInput = Input.GetAxisRaw("Vertical");
+        input = new Vector2(xInput, yInput).normalized;
+    }
+
+    private void FixedUpdate()
+    {
+        rb.velocity = input * speed;
+    }
+
+    private void Flip()
+    {
+        if ((isFacingRight && input.x < 0f) || (!isFacingRight && input.x > 0f))
+        {
+            Vector3 scale = transform.localScale;
+            scale.x *= -1f;
+            transform.localScale = scale;
+            isFacingRight = !isFacingRight;
+        }
+    }
+}
