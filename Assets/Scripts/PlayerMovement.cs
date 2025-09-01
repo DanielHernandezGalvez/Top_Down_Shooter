@@ -5,17 +5,20 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float speed;
 
     private Rigidbody2D rb;
+    private Animator animator;
     private Vector2 input;
     private bool isFacingRight = true;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     void Update()
     {
         ProcessInput();
         Flip();
+        animator.SetFloat("Speed", input.magnitude);
     }
 
     private void ProcessInput()
@@ -23,6 +26,8 @@ public class PlayerMovement : MonoBehaviour
         float xInput = Input.GetAxisRaw("Horizontal");
         float yInput = Input.GetAxisRaw("Vertical");
         input = new Vector2(xInput, yInput).normalized;
+
+        
     }
 
     private void FixedUpdate()
