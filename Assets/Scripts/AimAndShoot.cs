@@ -2,11 +2,12 @@ using UnityEngine;
 
 public class AimAndShoot : MonoBehaviour
 {
-    [SerializeField] private Transform playerTransform;
+    [SerializeField] private Transform playerTransform, shootPosition;
+    [SerializeField] private GameObject arrowPrefab;
     [SerializeField] private float aimSpeed;
 
     private Camera cam;
-    private Vector2 mouseWorldPosition;
+    private Vector2 mouseWorldPosition, direction;
 
     void Start()
     {
@@ -16,9 +17,23 @@ public class AimAndShoot : MonoBehaviour
     void Update()
     {
         transform.position = playerTransform.position;
-        mouseWorldPosition = cam.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 direction = mouseWorldPosition - (Vector2)transform.position;
-        transform.right = Vector2.MoveTowards(transform.right, direction, aimSpeed * Time.deltaTime);
+        Aim();
+        Shoot();
+    }
 
+    private void Shoot()
+    {
+        if (Input.GetButtonDown("Fire1"))
+        {
+            GameObject arrow = Instantiate(arrowPrefab, shootPosition.position, transform.rotation);
+            arrow.GetComponent<Arrow>().Launch(direction);
+        }
+    }
+
+    private void Aim()
+    {
+        mouseWorldPosition = cam.ScreenToWorldPoint(Input.mousePosition);
+        direction = (mouseWorldPosition - (Vector2)transform.position).normalized;
+        transform.right = Vector2.MoveTowards(transform.right, direction, aimSpeed * Time.deltaTime);
     }
 }
