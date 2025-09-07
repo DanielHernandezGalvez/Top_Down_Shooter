@@ -4,6 +4,7 @@ using UnityEngine;
 public class Healt : MonoBehaviour
 {
     [SerializeField] GameObject explosionPrefab;
+    [SerializeField] private HealthBar healthbar;
     [SerializeField] private int maxHealth;
 
     private SpriteRenderer spriteRenderer;
@@ -35,6 +36,7 @@ public class Healt : MonoBehaviour
         }
         else
         {
+            healthbar.UpdateHealthBar(maxHealth, health);
             StartCoroutine(Blink(0.1f));
         }
     }
