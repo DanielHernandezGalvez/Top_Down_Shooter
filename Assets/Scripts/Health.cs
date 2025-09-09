@@ -33,6 +33,7 @@ public class Healt : MonoBehaviour
         {
             Instantiate(explosionPrefab, transform.position, Quaternion.identity);
             Destroy(gameObject);
+            GameManager.Instance.DecreaseEnemiesLeft();
         }
         else
         {

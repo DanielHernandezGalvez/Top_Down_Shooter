@@ -16,6 +16,11 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if(GameManager.Instance.IsPlayerDead)
+        {
+            input = Vector2.zero;
+            return;
+        }
         ProcessInput();
         Flip();
         animator.SetFloat("Speed", input.magnitude);

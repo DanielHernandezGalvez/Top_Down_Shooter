@@ -16,6 +16,10 @@ public class AimAndShoot : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.Instance.IsPlayerDead)
+        {
+            return;
+        }
         transform.position = playerTransform.position;
         Aim();
         Shoot();
